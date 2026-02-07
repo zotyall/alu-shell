@@ -1,2 +1,2 @@
-#!/bin/bash
-echo $$
+#!/usr/bin/env bash
+echo $$ #$$ prints the PID (process ID) of the current script
