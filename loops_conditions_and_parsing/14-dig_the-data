@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# This script groups visitors by IP and HTTP status code
+# It counts occurrences and sorts from highest to lowest
+# Only awk is used for parsing (no while, for, until, cut)
+
+# Explanation:
+# $1 -> IP address
+# $9 -> HTTP status code
+# We combine them as a key and count occurrences
+# Then print count, IP and status
+# Finally sort numerically in reverse order
+
+awk '{ count[$1 " " $9]++ }
+END {
+    for (key in count)
+        print count[key], key
+}' apache-access.log | sort -nr
+
