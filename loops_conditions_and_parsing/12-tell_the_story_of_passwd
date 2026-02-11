@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-# This script tells the story of /etc/passwd users
+# This script reads /etc/passwd using a while loop and IFS
+# It tells a story about each user in the system
 
-while IFS=: read -r username password userid group_id comment home shell
+# Set the Internal Field Separator to colon
+IFS=:
+
+# Read /etc/passwd line by line
+while read -r username password uid gid userinfo homedir shell
 do
-    # Default the comment to username if empty
-    [ -z "$comment" ] && comment="$username"
-
-    echo "The user $username is part of $group_id gang, lives in $home and rides $shell. $userid's place is protected by the passcode $password, more info about the user here: $comment"
+    # Display formatted output
+    echo "The user $username is part of the $gid gang, lives in $homedir and rides $shell. $uid's place is protected by the passcode $password, more info about the user here: $userinfo"
 done < /etc/passwd
 
