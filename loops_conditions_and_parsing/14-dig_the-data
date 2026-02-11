@@ -9,10 +9,7 @@
 # We combine them as a key and count occurrences
 # Then print count, IP and status
 # Finally sort numerically in reverse order
-
-awk '{ count[$1 " " $9]++ }
-END {
-    for (key in count)
-        print count[key], key
-}' apache-access.log | sort -nr
-
+awk '{ print $1, $9 }' apache-access.log | \
+sort | \
+uniq -c | \
+sort -nr
