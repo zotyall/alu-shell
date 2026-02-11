@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 # This script tells the story of /etc/passwd users
 
-while IFS=: read -r username _ userid group_id home shell comment
+while IFS=: read -r username password userid group_id comment home shell
 do
-    # If some fields are empty, assign default values
-    [ -z "$group_id" ] && group_id="unknown"
-    [ -z "$home" ] && home="unknown"
-    [ -z "$shell" ] && shell="unknown"
+    # Default the comment to username if empty
     [ -z "$comment" ] && comment="$username"
 
-    echo "The user $username is part of $group_id gang, lives in $home and rides $shell. $userid's place is protected by the passcode x, more info about the user here: $comment"
+    echo "The user $username is part of $group_id gang, lives in $home and rides $shell. $userid's place is protected by the passcode $password, more info about the user here: $comment"
 done < /etc/passwd
 
