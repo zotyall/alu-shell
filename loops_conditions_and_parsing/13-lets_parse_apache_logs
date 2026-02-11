@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This script parses the Apache access log file
+# It displays the visitor IP address and the HTTP status code
+# It uses awk (no while, for, until, or cut allowed)
+
+# Use awk to print:
+# $1 -> IP address
+# $9 -> HTTP status code (standard Apache log format)
+
+awk '{ print $1, $9 }' apache-access.log
+
